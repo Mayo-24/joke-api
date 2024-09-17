@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+    body{
+      height: 80vh;
+      background-color: #B6D9B369;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container{
+      width: 350px;
+      height: 120px;
+      background-color: #FFFFFFA3;
+      text-align: center;
+      padding: 5px;
+      border-radius: 6px;
+      box-shadow: 0 0 3px 0.1px gray;
+    }
+    section{
+      margin-top: -12px;
+    }
+    button{
+      margin: 30px 0 0 110px;
+      width: 150px;
+      height: 32px;
+      border: none;
+      border-radius: 5px;
+      background-color: #3D3D3D;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-body">
+  <div class="container">
+<h2>Welcome to Dad Jokes!</h2>
+<section class="api_body"></section>
+</div>
+<button id="fecthJoke">Get Another Joke</button>
+</div>
+
+<script>
+  const api_body = document.querySelector('.api_body');
+  const URL = "https://icanhazdadjoke.com/";
+ // const URL = `https://api.openweathermap.org/data/2.5/weather?q={city name}&appid=dba22df8041b9e8502d98d810078828d`;
+  /*const fecthData =() => {
+    fetch(URL,{
+      headers:{
+        Accept:"application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data.joke);
+        api_body.innerHTML= data.joke;
+         
+      })
+      .catch((error) => {
+      api_body.innerHTML = `Api is not working`
+        console.log("I am sorry");
+      });
+  };*/
+  
+ async function fecthData(){
+    try{
+    const res = await fetch(URL,{
+      headers:{
+        Accept:'application/json',
+      },
+    });
+    const data = await res.json();
+    console.log(data.joke);
+   api_body.innerHTML= `😆😆${data.joke}`;
+    
+ } catch (error){
+   api_body.innerHTML = `Api is not working`
+   console.log("I am sorry");
+ };
+  };
+  
+ /*const fecthData = async()=> {
+    try{
+      const res = await fetch(URL,{
+        headers:{
+          Accept:'application/json',
+        },
+      });
+      const data = await res.json();
+      console.log(data.joke);
+      api_body.innerHTML = data.joke;
+    } catch (error){
+      api_body.innerHTML = 'Api is not working';
+      console.log('i am sorry');
+    };
+  };*/
+  
+  fecthData();
+  
+  document.getElementById('fecthJoke').addEventListener('click', fecthData);
+  
+</script>
+</body>
+
+</html>
